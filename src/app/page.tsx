@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -6,7 +6,6 @@ export default function Home() {
       <div className="pb-5">
         <h1>Welcome to Ore Lickers!</h1>
       </div>
-
       <div>
         <Image
           src="https://images.evetech.net/corporations/98737160/logo"
@@ -17,5 +16,5 @@ export default function Home() {
         />
       </div>
     </main>
-  )
+  );
 }
