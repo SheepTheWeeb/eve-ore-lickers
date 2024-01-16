@@ -11,10 +11,13 @@
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.3.0",
     "contentful": "^10.6.16",
+    "flowbite": "^2.2.1",
+    "flowbite-react": "^0.7.2",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-query": "^3.39.3"
+    "react-query": "^3.39.3",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/node": "^20",

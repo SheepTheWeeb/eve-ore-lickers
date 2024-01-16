@@ -7,7 +7,7 @@ export default function Home() {
   const { data, isLoading } = HomeController().useHomePageContent();
 
   return (
-    <main className="flex flex-col items-center p-24">
+    <main className="flex flex-col">
       {isLoading || !data ? (
         <p>Loading...</p>
       ) : (
@@ -16,7 +16,10 @@ export default function Home() {
             <h1>{data.title}</h1>
           </div>
           <div className="leading-[2em] mb-10">
-            <p dangerouslySetInnerHTML={{ __html: data.homeText }} />
+            <p
+              className="content"
+              dangerouslySetInnerHTML={{ __html: data.homeText }}
+            />
           </div>
           <div className="flex justify-center">
             <Image
