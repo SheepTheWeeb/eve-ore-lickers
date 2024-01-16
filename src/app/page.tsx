@@ -13,10 +13,12 @@ export default function Home() {
       ) : (
         <div>
           <div className="pb-5">
-            <h1>{data?.title}</h1>
+            <h1>{data.title}</h1>
           </div>
-          <div dangerouslySetInnerHTML={{ __html: data.homeText }} />
-          <div>
+          <div className="leading-[2em] mb-10">
+            <p dangerouslySetInnerHTML={{ __html: data.homeText }} />
+          </div>
+          <div className="flex justify-center">
             <Image
               src={data.image.desktop.url}
               alt="logo"
