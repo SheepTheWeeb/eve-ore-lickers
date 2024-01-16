@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['images.evetech.net'],
-      },
-}
+  images: {
+    domains: ["images.ctfassets.net"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
