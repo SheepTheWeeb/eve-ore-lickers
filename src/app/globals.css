@@ -48,13 +48,13 @@ h6 {
   line-height: 1.75rem;
 }
 
-ul {
+.content ul {
   list-style: disc;
   padding: 5px;
   margin: 15px;
 }
 
-ol {
+.content ol {
   list-style: decimal;
   padding: 5px;
   margin: 15px;
