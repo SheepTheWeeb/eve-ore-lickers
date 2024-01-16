@@ -1,5 +1,5 @@
 export const LOCALES = {
-  DEFAULT: "en-EN",
-  EN: "en-EN",
+  DEFAULT: "en",
+  EN: "en",
   NL: "nl-NL",
 };
