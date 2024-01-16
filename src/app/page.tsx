@@ -15,6 +15,7 @@ export default function Home() {
           <div className="pb-5">
             <h1>{data?.title}</h1>
           </div>
+          <div dangerouslySetInnerHTML={{ __html: data.homeText }} />
           <div>
             <Image
               src={data.image.desktop.url}

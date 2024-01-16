@@ -1,24 +1,12 @@
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
 import { HomePageContent } from "@/domain/cms/home";
+import { mapCMSImage } from "./common-mapper";
 
 export const mapHomePageContent = (apiData: any): HomePageContent => {
-  // TODO: remove console log
-  console.log(apiData);
-  const { title, logo } = apiData.fields;
-
+  const { title, homeText, logo } = apiData.fields;
   return {
     title,
-    homeText: "TODO:",
-    image: {
-      desktop: {
-        url: `https:${logo.fields.file.url}`,
-        width: logo.fields.file.details.image.width,
-        height: logo.fields.file.details.image.height,
-      },
-      mobile: {
-        url: `https:${logo.fields.file.url}`,
-        width: logo.fields.file.details.image.width,
-        height: logo.fields.file.details.image.height,
-      },
-    },
+    homeText: documentToHtmlString(homeText),
+    image: mapCMSImage(logo),
   };
 };
