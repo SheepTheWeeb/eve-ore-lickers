@@ -1,7 +1,7 @@
 "use client";
 
+import CMSImage from "@/components/common/cms-image";
 import { HomeController } from "@/controllers/home-controller";
-import Image from "next/image";
 import { contentfulSettings } from "@/settings/contentful-settings";
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
@@ -9,6 +9,7 @@ import { HiInformationCircle } from "react-icons/hi";
 const settings = contentfulSettings[process.env.NODE_ENV];
 
 export default function Home() {
+  // TODO: try SSR this
   const { data, isLoading, error } = HomeController().useHomePageContent({
     id: settings.homePageContentId,
   });
@@ -33,15 +34,11 @@ export default function Home() {
           <h1>{data?.title}</h1>
         </div>
         {data?.imageOne && (
-          <div className="flex justify-center pb-5">
-            <Image
-              src={data.imageOne.desktop.url}
-              alt="image1"
-              width={data.imageOne.desktop.width}
-              height={data.imageOne.desktop.height}
-              priority
-            />
-          </div>
+          <CMSImage
+            data={data.imageOne}
+            alt="Image1"
+            classes="flex justify-center"
+          />
         )}
         <div className="leading-[2em] mb-10">
           <p
@@ -50,15 +47,11 @@ export default function Home() {
           />
         </div>
         {data?.imageTwo && (
-          <div className="flex justify-center">
-            <Image
-              src={data.imageTwo.desktop.url}
-              alt="image2"
-              width={data.imageTwo.desktop.width}
-              height={data.imageTwo.desktop.height}
-              priority
-            />
-          </div>
+          <CMSImage
+            data={data.imageTwo}
+            alt="Image2"
+            classes="flex justify-center"
+          />
         )}
       </div>
     </main>
