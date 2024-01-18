@@ -1,5 +1,5 @@
-import { HomePageContent } from "./home";
+import { StaticPageContent } from "./static-page";
 
 export type ContentfulService = {
-  getHomePageContent(locale?: string): Promise<HomePageContent>;
+  getStaticPageContent(id: string, locale?: string): Promise<StaticPageContent>;
 };
