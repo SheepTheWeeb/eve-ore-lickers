@@ -2,7 +2,7 @@ import CMSImage from "@/components/common/cms-image";
 import ErrorMessage from "@/components/common/error-message";
 import Loading from "@/components/common/loading";
 import { HomeController } from "@/controllers/home-controller";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 
 export default async function Home() {
   try {
