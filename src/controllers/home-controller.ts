@@ -1,26 +1,20 @@
-import { GetStaticPageContentParams } from "@/domain/cms/static-page";
 import { ContentfulGateway } from "@/gateways/cms/contentful-gateway";
+import { contentfulSettings } from "@/settings/contentful-settings";
 import { getStaticPageContent } from "@/use-cases/get-staticpage-content";
-import { LOCALES } from "@/utils/constants/locales";
 import { useQuery } from "react-query";
 
+const settings = contentfulSettings[process.env.NODE_ENV];
+
 export const HomeController = () => {
-  const getHomePageContent = async ({ queryKey }: any) => {
-    const [_, params] = queryKey;
+  const getHomePageContent = async () => {
     return await getStaticPageContent(
       ContentfulGateway(),
-      params.id,
-      params.locale
+      settings.homePageContentId
     );
   };
 
-  const useHomePageContent = ({
-    id,
-    locale = LOCALES.DEFAULT,
-  }: GetStaticPageContentParams) =>
-    useQuery(["homePageContent", { id, locale }], (params) =>
-      getHomePageContent(params)
-    );
+  const useHomePageContent = () =>
+    useQuery("homePageContent", getHomePageContent);
 
   return {
     useHomePageContent,

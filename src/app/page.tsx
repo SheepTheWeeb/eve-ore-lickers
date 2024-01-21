@@ -2,17 +2,12 @@
 
 import CMSImage from "@/components/common/cms-image";
 import { HomeController } from "@/controllers/home-controller";
-import { contentfulSettings } from "@/settings/contentful-settings";
 import { Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
 
-const settings = contentfulSettings[process.env.NODE_ENV];
-
 export default function Home() {
   // TODO: try SSR this
-  const { data, isLoading, error } = HomeController().useHomePageContent({
-    id: settings.homePageContentId,
-  });
+  const { data, isLoading, error } = HomeController().useHomePageContent();
 
   if (error) {
     return (
