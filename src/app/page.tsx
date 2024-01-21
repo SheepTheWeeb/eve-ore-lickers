@@ -1,66 +1,47 @@
-"use client";
-
+import CMSImage from "@/components/common/cms-image";
+import ErrorMessage from "@/components/common/error-message";
+import Loading from "@/components/common/loading";
 import { HomeController } from "@/controllers/home-controller";
-import Image from "next/image";
-import { contentfulSettings } from "@/settings/contentful-settings";
-import { Alert } from "flowbite-react";
-import { HiInformationCircle } from "react-icons/hi";
+import { Suspense } from "react";
 
-const settings = contentfulSettings[process.env.NODE_ENV];
+export default async function Home() {
+  try {
+    const homeContent = await HomeController().getHomePageContent();
 
-export default function Home() {
-  const { data, isLoading, error } = HomeController().useHomePageContent({
-    id: settings.homePageContentId,
-  });
-
-  if (error) {
     return (
-      <Alert color="failure" icon={HiInformationCircle}>
-        <span className="font-medium">Error:</span>
-        {" Something went wrong when fetching homepage data."}
-      </Alert>
+      <main className="flex flex-col">
+        <Suspense fallback={<Loading />}>
+          <div>
+            <div className="pb-5">
+              <h1>{homeContent.title}</h1>
+            </div>
+            {homeContent?.imageOne && (
+              <CMSImage
+                data={homeContent.imageOne}
+                alt="Image1"
+                classes="flex justify-center"
+              />
+            )}
+            <div className="leading-[2em] mb-10">
+              <div
+                className="content"
+                dangerouslySetInnerHTML={{ __html: homeContent.contentBlock }}
+              />
+            </div>
+            {homeContent?.imageTwo && (
+              <CMSImage
+                data={homeContent.imageTwo}
+                alt="Image2"
+                classes="flex justify-center"
+              />
+            )}
+          </div>
+        </Suspense>
+      </main>
+    );
+  } catch (error) {
+    return (
+      <ErrorMessage message="Something went wrong when fetching homepage data." />
     );
   }
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  return (
-    <main className="flex flex-col">
-      <div>
-        <div className="pb-5">
-          <h1>{data?.title}</h1>
-        </div>
-        {data?.imageOne && (
-          <div className="flex justify-center pb-5">
-            <Image
-              src={data.imageOne.desktop.url}
-              alt="image1"
-              width={data.imageOne.desktop.width}
-              height={data.imageOne.desktop.height}
-              priority
-            />
-          </div>
-        )}
-        <div className="leading-[2em] mb-10">
-          <p
-            className="content"
-            dangerouslySetInnerHTML={{ __html: data?.contentBlock! }}
-          />
-        </div>
-        {data?.imageTwo && (
-          <div className="flex justify-center">
-            <Image
-              src={data.imageTwo.desktop.url}
-              alt="image2"
-              width={data.imageTwo.desktop.width}
-              height={data.imageTwo.desktop.height}
-              priority
-            />
-          </div>
-        )}
-      </div>
-    </main>
-  );
 }

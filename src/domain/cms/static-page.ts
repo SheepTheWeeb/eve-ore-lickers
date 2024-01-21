@@ -6,3 +6,8 @@ export type StaticPageContent = {
   contentBlock: string;
   imageTwo?: CMSImage;
 };
+
+export type GetStaticPageContentParams = {
+  id: string;
+  locale?: string;
+};

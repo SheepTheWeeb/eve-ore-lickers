@@ -4,15 +4,15 @@ import { getStaticPageContent } from "@/use-cases/get-staticpage-content";
 
 const settings = contentfulSettings[process.env.NODE_ENV];
 
-export const HomeController = () => {
-  const getHomePageContent = async () => {
+export const AboutController = () => {
+  const getAboutPageContent = async () => {
     return await getStaticPageContent(
       ContentfulGateway(),
-      settings.homePageContentId
+      settings.aboutUsContentId
     );
   };
 
   return {
-    getHomePageContent,
+    getAboutPageContent,
   };
 };
