@@ -1,54 +1,47 @@
-"use client";
-
 import CMSImage from "@/components/common/cms-image";
+import ErrorMessage from "@/components/common/error-message";
+import Loading from "@/components/common/loading";
 import { HomeController } from "@/controllers/home-controller";
-import { Alert } from "flowbite-react";
-import { HiInformationCircle } from "react-icons/hi";
+import React, { Suspense } from "react";
 
-export default function Home() {
-  // TODO: try SSR this
-  const { data, isLoading, error } = HomeController().useHomePageContent();
+export default async function Home() {
+  try {
+    const homeContent = await HomeController().getHomePageContent();
 
-  if (error) {
     return (
-      <Alert color="failure" icon={HiInformationCircle}>
-        <span className="font-medium">Error:</span>
-        {" Something went wrong when fetching homepage data."}
-      </Alert>
+      <main className="flex flex-col">
+        <Suspense fallback={<Loading />}>
+          <div>
+            <div className="pb-5">
+              <h1>{homeContent.title}</h1>
+            </div>
+            {homeContent?.imageOne && (
+              <CMSImage
+                data={homeContent.imageOne}
+                alt="Image1"
+                classes="flex justify-center"
+              />
+            )}
+            <div className="leading-[2em] mb-10">
+              <div
+                className="content"
+                dangerouslySetInnerHTML={{ __html: homeContent.contentBlock }}
+              />
+            </div>
+            {homeContent?.imageTwo && (
+              <CMSImage
+                data={homeContent.imageTwo}
+                alt="Image2"
+                classes="flex justify-center"
+              />
+            )}
+          </div>
+        </Suspense>
+      </main>
+    );
+  } catch (error) {
+    return (
+      <ErrorMessage message="Something went wrong when fetching homepage data." />
     );
   }
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  return (
-    <main className="flex flex-col">
-      <div>
-        <div className="pb-5">
-          <h1>{data?.title}</h1>
-        </div>
-        {data?.imageOne && (
-          <CMSImage
-            data={data.imageOne}
-            alt="Image1"
-            classes="flex justify-center"
-          />
-        )}
-        <div className="leading-[2em] mb-10">
-          <p
-            className="content"
-            dangerouslySetInnerHTML={{ __html: data?.contentBlock! }}
-          />
-        </div>
-        {data?.imageTwo && (
-          <CMSImage
-            data={data.imageTwo}
-            alt="Image2"
-            classes="flex justify-center"
-          />
-        )}
-      </div>
-    </main>
-  );
 }
