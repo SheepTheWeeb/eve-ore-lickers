@@ -1,7 +1,7 @@
 import { ContentfulService } from "@/domain/cms/contentful-service";
 import { StaticPageContent } from "@/domain/cms/static-page";
 import { LOCALES } from "@/utils/constants/locales";
-import { mapStaticPageContent } from "@/utils/mappers/staticpage-mapper";
+import { mapStaticPageContent } from "@/utils/mappers/static-page-mapper";
 import { createClient } from "contentful";
 
 const client = createClient({
@@ -14,10 +14,10 @@ const ContentfulGateway = (): ContentfulService => {
     id: string,
     locale = LOCALES.DEFAULT
   ): Promise<StaticPageContent> => {
-    const homeResponse = await client.getEntry(id, {
+    const response = await client.getEntry(id, {
       locale,
     });
-    return mapStaticPageContent(homeResponse);
+    return mapStaticPageContent(response);
   };
 
   return {

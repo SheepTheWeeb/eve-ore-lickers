@@ -3,7 +3,7 @@ export type CMSImage = {
   mobile: ImageType;
 };
 
-type ImageType = {
+export type ImageType = {
   url: string;
   width: number;
   height: number;

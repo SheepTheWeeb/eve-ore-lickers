@@ -1,10 +1,10 @@
-import { CMSImage } from "./common";
+import { ImageType } from "./common";
 
 export type StaticPageContent = {
   title: string;
-  imageOne?: CMSImage;
+  imageOne?: ImageType;
   contentBlock: string;
-  imageTwo?: CMSImage;
+  imageTwo?: ImageType;
 };
 
 export type GetStaticPageContentParams = {
