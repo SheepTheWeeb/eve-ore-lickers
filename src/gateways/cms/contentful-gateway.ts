@@ -16,6 +16,7 @@ const ContentfulGateway = (): ContentfulService => {
   ): Promise<StaticPageContent> => {
     const response = await client.getEntry(id, {
       locale,
+      include: 3,
     });
     return mapStaticPageContent(response);
   };
