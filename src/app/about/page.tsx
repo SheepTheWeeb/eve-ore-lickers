@@ -1,6 +1,6 @@
-import CMSImage from "@/components/common/cms-image";
 import ErrorMessage from "@/components/common/error-message";
 import Loading from "@/components/common/loading";
+import Image from "next/image";
 import { AboutController } from "@/controllers/about-controller";
 import { Suspense } from "react";
 
@@ -16,11 +16,14 @@ export default async function About() {
               <h1>{aboutContent.title}</h1>
             </div>
             {aboutContent?.imageOne && (
-              <CMSImage
-                data={aboutContent.imageOne}
-                alt="Image1"
-                classes="flex justify-center"
-              />
+              <div className="flex justify-center">
+                <Image
+                  src={aboutContent.imageOne.url}
+                  alt="Image1"
+                  width={aboutContent.imageOne.width}
+                  height={aboutContent.imageOne.height}
+                />
+              </div>
             )}
             <div className="leading-[2em] mb-10">
               <div
@@ -29,11 +32,14 @@ export default async function About() {
               />
             </div>
             {aboutContent?.imageTwo && (
-              <CMSImage
-                data={aboutContent.imageTwo}
-                alt="Image2"
-                classes="flex justify-center"
-              />
+              <div className="flex justify-center">
+                <Image
+                  src={aboutContent.imageTwo.url}
+                  alt="Image2"
+                  width={aboutContent.imageTwo.width}
+                  height={aboutContent.imageTwo.height}
+                />
+              </div>
             )}
           </div>
         </Suspense>

@@ -1,7 +1,7 @@
-import CMSImage from "@/components/common/cms-image";
 import ErrorMessage from "@/components/common/error-message";
 import Loading from "@/components/common/loading";
 import { HomeController } from "@/controllers/home-controller";
+import Image from "next/image";
 import { Suspense } from "react";
 
 export default async function Home() {
@@ -16,11 +16,14 @@ export default async function Home() {
               <h1>{homeContent.title}</h1>
             </div>
             {homeContent?.imageOne && (
-              <CMSImage
-                data={homeContent.imageOne}
-                alt="Image1"
-                classes="flex justify-center"
-              />
+              <div className="flex justify-center">
+                <Image
+                  src={homeContent.imageOne.url}
+                  alt="Image1"
+                  width={homeContent.imageOne.width}
+                  height={homeContent.imageOne.height}
+                />
+              </div>
             )}
             <div className="leading-[2em] mb-10">
               <div
@@ -29,11 +32,14 @@ export default async function Home() {
               />
             </div>
             {homeContent?.imageTwo && (
-              <CMSImage
-                data={homeContent.imageTwo}
-                alt="Image2"
-                classes="flex justify-center"
-              />
+              <div className="flex justify-center">
+                <Image
+                  src={homeContent.imageTwo.url}
+                  alt="Image2"
+                  width={homeContent.imageTwo.width}
+                  height={homeContent.imageTwo.height}
+                />
+              </div>
             )}
           </div>
         </Suspense>
