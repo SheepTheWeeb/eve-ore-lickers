@@ -21,26 +21,21 @@ const options = {
       },
     }: any) => {
       const { contentType } = fields.file;
-
-      switch (true) {
-        case contentType.startsWith("image/"):
-          return `<img src="${fields.file.url}" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`;
-        default:
-          return "Asset Type not supported...";
+      if (contentType.startsWith("image/")) {
+        return `<img src="${fields.file.url}" height="${fields.file.details.image.height}" width="${fields.file.details.image.width}" alt="${fields.description}"/>`;
       }
+      return "Asset Type not supported...";
     },
     [BLOCKS.PARAGRAPH]: (node: any, next: any) =>
       `<p>${next(node.content).replace(/\n/g, "<br/>")}</p>`,
     [BLOCKS.TABLE]: (node: any, next: any) =>
-      `<div class="overflow-x-scroll"><table class="table-fixed w-full border-collapse">${next(
+      `<div class="overflow-auto p-10"><table class="table-auto w-full">${next(
         node.content
       )}</table></div>`,
     [BLOCKS.TABLE_HEADER_CELL]: (node: any, next: any) =>
-      `<th class="border-b border-slate-600 p-4 pr-8 pl-8 font-medium text-left">${next(
-        node.content
-      )}</th>`,
+      `<th class="px-6 py-2 font-medium text-left">${next(node.content)}</th>`,
     [BLOCKS.TABLE_CELL]: (node: any, next: any) =>
-      `<td class="border-b border-slate-700 p-2 pr-8 pl-8">${next(
+      `<td class="border-t border-slate-700 px-6 py-2">${next(
         node.content
       )}</td>`,
   },
