@@ -48,6 +48,19 @@ h6 {
   line-height: 1.75rem;
 }
 
+.content p {
+  margin-bottom: 10px;
+  line-height: 1.5em;
+}
+
+.content th p {
+  margin: 0;
+}
+
+.content td p {
+  margin: 0;
+}
+
 .content ul {
   list-style: disc;
   padding: 5px;
@@ -57,5 +70,9 @@ h6 {
 .content ol {
   list-style: decimal;
   padding: 5px;
-  margin: 15px;
+  margin: 0 15px 10px;
+}
+
+.content ol p {
+  margin: 0;
 }
